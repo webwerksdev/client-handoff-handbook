@@ -67,4 +67,4 @@ WP sections for your stack's equivalents.
 [MIT](LICENSE). Use it for client work, reskin it, ship it under your own brand. A
 link back is appreciated, never required.
 
-Made by [webwerks.dev](https://webwerks.dev), a web studio in San Antonio, TX.
+Made by [webwerks.dev](https://webwerks.dev), a web lab in San Antonio, TX.
