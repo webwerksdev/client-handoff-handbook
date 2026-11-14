@@ -1,0 +1,1107 @@
+<!--
+  Client handoff handbook template. Per client: replace every [[PLACEHOLDER]],
+  keep ONE option inside each "variant" marker and delete the others, prune
+  rows to the build, rename to <client>-website-handbook.html. Guide: README.
+-->
+<title>[[CLIENT]] Website Handbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* Dark-first: bare :root is the [[Studio]] dark palette; light overrides below. */
+  :root {
+    --ground: #141414;
+    --panel: #1C1F22;
+    --panel-2: #2A2F32;
+    --text: #E8E8E8;
+    --muted: #A4ADB4;
+    --line: rgba(164, 173, 180, 0.32);
+    --line-soft: rgba(164, 173, 180, 0.18);
+    --blue: #0992f8;
+    --blue-hover: #2F71F1;
+    --green: #7AF94E;
+    --purple-text: #C56BE0;
+    --ok: #7AF94E;
+    --warn: #E5B567;
+    --stop: #E06C60;
+    --ok-border: rgba(122, 249, 78, 0.35);
+    --warn-border: rgba(229, 181, 103, 0.4);
+    --stop-border: rgba(224, 108, 96, 0.45);
+    --wp-border: rgba(122, 249, 78, 0.5);
+    --bricks-border: rgba(168, 56, 201, 0.6);
+    --dev-border: rgba(9, 146, 248, 0.55);
+    --code-bg: #101214;
+    --glow-blue: 0 0 32px -2px rgba(9, 146, 248, 0.4), 0 0 80px 0 rgba(9, 146, 248, 0.15);
+    /* Geometry per the site's kanso tokens: square, no exceptions; 3px badges only. */
+    --radius-container: 0px;
+    --radius-badge: 3px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground: #F4F4F4;
+      --panel: #FCFCFC;
+      --panel-2: #FFFFFF;
+      --text: #1B1D1F;
+      --muted: #565F66;
+      --line: rgba(40, 50, 58, 0.24);
+      --line-soft: rgba(40, 50, 58, 0.13);
+      --blue: #0670C0;
+      --blue-hover: #0992f8;
+      --green: #2E7D14;
+      --purple-text: #8F27AF;
+      --ok: #2E7D14;
+      --warn: #8F6414;
+      --stop: #B23B31;
+      --ok-border: rgba(46, 125, 20, 0.4);
+      --warn-border: rgba(143, 100, 20, 0.45);
+      --stop-border: rgba(178, 59, 49, 0.45);
+      --wp-border: rgba(46, 125, 20, 0.45);
+      --bricks-border: rgba(143, 39, 175, 0.5);
+      --dev-border: rgba(6, 112, 192, 0.5);
+      --code-bg: #EAECEE;
+      --glow-blue: 0 0 28px -2px rgba(9, 146, 248, 0.3), 0 0 64px 0 rgba(9, 146, 248, 0.1);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F4F4F4;
+    --panel: #FCFCFC;
+    --panel-2: #FFFFFF;
+    --text: #1B1D1F;
+    --muted: #565F66;
+    --line: rgba(40, 50, 58, 0.24);
+    --line-soft: rgba(40, 50, 58, 0.13);
+    --blue: #0670C0;
+    --blue-hover: #0992f8;
+    --green: #2E7D14;
+    --purple-text: #8F27AF;
+    --ok: #2E7D14;
+    --warn: #8F6414;
+    --stop: #B23B31;
+    --ok-border: rgba(46, 125, 20, 0.4);
+    --warn-border: rgba(143, 100, 20, 0.45);
+    --stop-border: rgba(178, 59, 49, 0.45);
+    --wp-border: rgba(46, 125, 20, 0.45);
+    --bricks-border: rgba(143, 39, 175, 0.5);
+    --dev-border: rgba(6, 112, 192, 0.5);
+    --code-bg: #EAECEE;
+    --glow-blue: 0 0 28px -2px rgba(9, 146, 248, 0.3), 0 0 64px 0 rgba(9, 146, 248, 0.1);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--text);
+  }
+  code, .path {
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.84em;
+    background: var(--code-bg);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-badge);
+    padding: 0.12em 0.45em;
+    white-space: nowrap;
+    color: var(--text);
+  }
+  a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; transition: color 0.2s ease-in-out; }
+  a:hover { color: var(--blue-hover); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  p { margin: 0 0 1em; }
+  strong { font-weight: 600; color: var(--text); }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  /* Masthead */
+  header.masthead {
+    grid-column: 1 / -1;
+    padding: 52px 0 34px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .eyebrow .sl { color: var(--blue); }
+  .mast-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .mast-top .eyebrow { margin-bottom: 0; }
+  .theme-toggle {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-container);
+    color: var(--muted);
+    padding: 7px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  .theme-toggle::before { content: "// "; color: var(--blue); }
+  .theme-toggle:hover { color: var(--text); border-color: var(--blue); box-shadow: 0 0 16px -2px rgba(9, 146, 248, 0.4); }
+  header.masthead h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.02;
+  }
+  .standfirst {
+    max-width: 60ch;
+    color: var(--muted);
+    margin-top: 18px;
+    font-size: 1.02rem;
+  }
+  .standfirst code { white-space: normal; }
+
+  /* Traffic-light legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin-top: 22px; font-size: 0.875rem; color: var(--muted); }
+  .legend > span:nth-child(even) { margin-left: -12px; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: var(--radius-badge);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+    color: var(--text);
+    background: var(--panel);
+  }
+  .tag::before { content: ""; width: 7px; height: 7px; border-radius: 9999px; }
+  .tag.go::before { background: var(--ok); }
+  .tag.care::before { background: var(--warn); }
+  .tag.stop::before { background: var(--stop); }
+
+  /* Training agenda */
+  .agenda {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 0 0 16px;
+  }
+  .agenda .slot {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-container);
+    padding: 16px 18px;
+  }
+  .agenda .min { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; color: var(--blue); display: block; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  .agenda b { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; display: block; }
+  .agenda span.desc { font-size: 0.86rem; color: var(--muted); display: block; margin-top: 5px; }
+
+  /* Sidebar nav */
+  nav.toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
+  nav.toc .toc-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  nav.toc .toc-label::before { content: "// "; color: var(--blue); }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  nav.toc li { counter-increment: toc; }
+  nav.toc a {
+    display: flex;
+    gap: 10px;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-container);
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.35;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12.5px;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+  nav.toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    color: var(--blue);
+    padding-top: 1px;
+  }
+  nav.toc a:hover { color: var(--text); border-color: var(--line-soft); }
+  nav.toc a[aria-current="true"] { color: var(--text); border-color: var(--line); background: var(--panel); }
+
+  /* Sections */
+  main { min-width: 0; counter-reset: sec; }
+  section { margin-bottom: 60px; scroll-margin-top: 24px; counter-increment: sec; }
+  section > h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    margin-bottom: 20px;
+  }
+  section > h2 .num {
+    display: block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  section > h2 .num::before { content: "// "; color: var(--blue); }
+  section > h2 .num::after { content: counter(sec, decimal-leading-zero); }
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 30px 0 10px;
+  }
+  section > p, section li { max-width: 68ch; color: var(--text); }
+  section > p { color: var(--muted); }
+  section > p strong { color: var(--text); }
+
+  /* Cards & tables */
+  .card {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-container);
+    padding: 20px 24px;
+    margin: 0 0 16px;
+  }
+  .card h3:first-child, .card h4:first-child { margin-top: 0; }
+  .card p, .card li { color: var(--muted); }
+  .card p:last-child { margin-bottom: 0; }
+  .grid2 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin: 0 0 16px; }
+  .grid2 .card { margin: 0; }
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-container);
+    background: var(--panel);
+    margin: 0 0 16px;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.94rem; }
+  th, td { text-align: left; padding: 12px 18px; vertical-align: top; }
+  th {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  td { border-bottom: 1px solid var(--line-soft); color: var(--muted); }
+  td strong { color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  /* Where-badge */
+  .where {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: var(--radius-badge);
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .where.wp { color: var(--green); border-color: var(--wp-border); }
+  .where.bricks { color: var(--purple-text); border-color: var(--bricks-border); }
+  .where.dev { color: var(--blue); border-color: var(--dev-border); }
+
+  /* Steps */
+  ol.steps { list-style: none; margin: 0 0 16px; padding: 0; counter-reset: step; }
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding: 14px 0 14px 84px;
+    border-top: 1px solid var(--line-soft);
+  }
+  ol.steps > li:last-child { border-bottom: 1px solid var(--line-soft); }
+  ol.steps > li::before {
+    content: counter(step, decimal-leading-zero) " /";
+    position: absolute;
+    left: 0;
+    top: 19px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+  }
+  ol.steps li { color: var(--muted); }
+  ol.steps li strong { color: var(--text); }
+
+  /* Callouts */
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-container);
+    padding: 14px 18px;
+    margin: 16px 0;
+    max-width: 72ch;
+  }
+  .callout p { color: var(--muted); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .callout-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .callout .callout-label::before { content: "// "; }
+  .callout.tip { border-color: var(--ok-border); }
+  .callout.tip .callout-label { color: var(--ok); }
+  .callout.careful { border-color: var(--warn-border); }
+  .callout.careful .callout-label { color: var(--warn); }
+  .callout.stop { border-color: var(--stop-border); }
+  .callout.stop .callout-label { color: var(--stop); }
+
+  ul.plain { padding-left: 1.2em; margin: 0 0 1em; }
+  ul.plain li { margin-bottom: 7px; color: var(--muted); }
+  ul.plain li strong { color: var(--text); }
+
+  /* Admin-menu figure */
+  figure.mock { margin: 0 0 16px; border: 1px solid var(--line); border-radius: var(--radius-container); overflow: hidden; background: var(--panel); }
+  .mock-cap {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding: 12px 20px; border-bottom: 1px solid var(--line);
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+  .scrollx { overflow-x: auto; }
+  .admin { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-width: 600px; }
+  .menu { background: #1d2327; color: #c3c4c7; padding: 10px 0; font-size: 0.875rem; }
+  .menu div { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 16px; }
+  .menu .sep { height: 1px; background: rgba(255, 255, 255, 0.08); padding: 0; margin: 6px 0; }
+  .m { width: 8px; height: 8px; border-radius: 9999px; flex: none; }
+  .m-go { background: var(--ok); }
+  .m-care { background: var(--warn); }
+  .m-stop { background: var(--stop); }
+  .admin-key { padding: 20px 24px; display: grid; gap: 12px; align-content: start; }
+  .admin-key dl { margin: 0; display: grid; gap: 14px; }
+  .admin-key dt { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; color: var(--text); }
+  .admin-key dd { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; }
+
+  /* Editor mock */
+  .pin { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: var(--radius-badge); background: var(--blue); color: #fff; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; font-weight: 700; flex: none; }
+  .editor { display: grid; grid-template-columns: minmax(0, 1fr) 230px; min-width: 660px; font-size: 0.86rem; }
+  .ed-top { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  .ed-top .back { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.74rem; color: var(--muted); }
+  .ed-top .sp { flex: 1; }
+  .fake { font-size: 0.8rem; font-weight: 600; padding: 6px 14px; border-radius: var(--radius-badge); border: 1px solid var(--line); color: var(--text); }
+  .fake.solid { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .ed-main { border-right: 1px solid var(--line); display: grid; align-content: start; }
+  .ed-canvas { padding: 24px 30px; display: grid; gap: 12px; }
+  .ed-title { font-family: "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.015em; line-height: 1.05; display: flex; gap: 10px; align-items: center; color: var(--text); }
+  .ed-p { color: var(--muted); display: flex; gap: 10px; align-items: flex-start; }
+  .ed-add { display: flex; align-items: center; gap: 10px; color: var(--muted); }
+  .ed-add i { font-style: normal; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: var(--radius-badge); background: var(--text); color: var(--ground); font-weight: 700; }
+  .ed-box { border-top: 1px solid var(--line); padding: 14px 30px 18px; display: grid; gap: 8px; background: var(--panel); }
+  .ed-box .hd { font-weight: 600; display: flex; gap: 10px; align-items: center; color: var(--text); }
+  .ed-field { border: 1px solid var(--line-soft); border-radius: var(--radius-badge); padding: 7px 10px; background: var(--panel-2); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ed-side { padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+  .ed-side .tabs { display: flex; gap: 14px; padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--text); }
+  .ed-side .tabs span:last-child { font-weight: 400; color: var(--muted); }
+  .ed-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); color: var(--muted); }
+  .ed-row .l { display: flex; gap: 8px; align-items: center; }
+  .ed-row .v { color: var(--blue); font-weight: 600; }
+  .callouts { list-style: none; margin: 0; padding: 18px 20px; display: grid; gap: 13px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); border-top: 1px solid var(--line); }
+  .callouts li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.92rem; color: var(--muted); }
+  .callouts b { color: var(--text); }
+
+  /* Pre-publish checklist */
+  .check { border-top: 1px solid var(--line-soft); margin: 0 0 8px; }
+  .check label { display: flex; gap: 14px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line-soft); cursor: pointer; color: var(--text); font-weight: 500; }
+  .check label:hover { color: var(--blue); }
+  .check input {
+    appearance: none; -webkit-appearance: none;
+    width: 24px; height: 24px; border-radius: var(--radius-badge); border: 2px solid var(--line);
+    margin: 0; flex: none; display: grid; place-items: center; cursor: pointer;
+    transition: border-color 0.2s ease-in-out, background 0.2s ease-in-out;
+  }
+  .check label:hover input { border-color: var(--blue); }
+  .check input:checked { background: var(--blue); border-color: var(--blue); }
+  .check input:checked::after { content: ""; width: 9px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: translateY(-1px) rotate(-45deg); }
+  .check input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+  .check-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .check-foot::before { content: "// "; color: var(--blue); margin-right: -8px; }
+  .check-foot button { font: inherit; color: var(--blue); background: none; border: 0; cursor: pointer; padding: 8px 0; letter-spacing: inherit; text-transform: inherit; }
+
+  /* Report template */
+  .report {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem;
+    background: var(--code-bg);
+    color: var(--muted);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-container);
+    padding: 20px 22px;
+    white-space: pre-wrap;
+    line-height: 1.9;
+    overflow-x: auto;
+    margin: 0 0 16px;
+  }
+
+  /* Glossary */
+  dl.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); column-gap: 36px; border-top: 1px solid var(--line-soft); margin: 0; }
+  dl.glossary > div { padding: 15px 0; border-bottom: 1px solid var(--line-soft); }
+  dl.glossary dt { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; color: var(--text); }
+  dl.glossary dd { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; }
+
+  /* Resource cards */
+  .resources { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 0 0 16px; }
+  .resources a {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-container);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  .resources a:hover { border-color: var(--blue); box-shadow: var(--glow-blue); }
+  .resources .r-name { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.015em; display: block; }
+  .resources .r-desc { font-size: 0.88rem; color: var(--muted); display: block; margin-top: 5px; }
+  .resources .r-url { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; color: var(--blue); display: block; margin-top: 12px; overflow-wrap: anywhere; }
+
+  footer {
+    grid-column: 2;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    color: var(--muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+  }
+  footer .wordmark { font-weight: 700; color: var(--text); }
+  footer .wordmark .tld { color: var(--blue); }
+
+  @media (max-width: 960px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; }
+    nav.toc { position: static; margin-bottom: 40px; }
+    footer { grid-column: 1; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px 56px; }
+    header.masthead { padding: 32px 0 24px; }
+    .mast-top { flex-wrap: wrap; }
+    .standfirst { font-size: 1rem; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    code, .path { white-space: normal; overflow-wrap: anywhere; }
+    ol.steps > li { padding: 36px 0 14px; }
+    ol.steps > li::before { top: 14px; }
+    th, td { padding: 10px 12px; }
+    table { font-size: 0.9rem; }
+    .callout { padding: 12px 14px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="mast-top">
+      <div class="eyebrow"><span class="sl">//</span> [[client-domain.com]] &mdash; site handoff</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme">theme: dark</button>
+    </div>
+    <h1>[[CLIENT]] Website Handbook</h1>
+    <p class="standfirst">Everything you need to run the [[CLIENT]] website day to day: where each piece of content lives, how to publish and update it, how [[SEO / backups / maintenance &mdash; match sections kept]] work, and how to get developer help when a job is bigger than an edit. Keep this page bookmarked &mdash; it's written for the site manager, and it doubles as the agenda for our handoff walkthrough.</p>
+    <div class="legend">
+      <span class="tag go">You've got this</span><span>safe any time</span>
+      <span class="tag care">Careful</span><span>fine, double-check first</span>
+      <span class="tag stop">Ask [[Studio]]</span><span>leave to us</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <div class="toc-label">index</div>
+    <ol>
+      <li><a href="#training">The training session</a></li>
+      <li><a href="#stack">What the site is built on</a></li>
+      <li><a href="#rules">Three golden rules</a></li>
+      <li><a href="#login">Your login and roles</a></li>
+      <li><a href="#map">Where each thing is edited</a></li>
+      <li><a href="#everyday">Everyday edits, step by step</a></li>
+      <li><a href="#checklist-sec">Before you hit Publish</a></li>
+      <li><a href="#bricks">Bricks Builder</a></li>
+      <li><a href="#store">The store</a></li>
+      <li><a href="#seo">SEO &amp; meta info</a></li>
+      <li><a href="#consent">Tracking &amp; the consent banner</a></li>
+      <li><a href="#domain">Your domain and email</a></li>
+      <li><a href="#backups">Backups &amp; restore</a></li>
+      <li><a href="#maintenance">Maintenance</a></li>
+      <li><a href="#fast">Keeping the site fast</a></li>
+      <li><a href="#handsoff">Hands-off zones</a></li>
+      <li><a href="#help">When something breaks</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- variant: delete this section when no live training session is planned -->
+    <section id="training">
+      <h2><span class="num"></span>The training session</h2>
+      <p>We'll walk this handbook together in about 30 minutes. The agenda:</p>
+      <div class="agenda">
+        <div class="slot"><span class="min">00&ndash;05 min</span><b>Log in, look around</b><span class="desc">Your account and the admin menu.</span></div>
+        <div class="slot"><span class="min">05&ndash;20 min</span><b>Publish a [[post / entry]]</b><span class="desc">Write it, publish it, then edit it.</span></div>
+        <div class="slot"><span class="min">20&ndash;25 min</span><b>[[The other content types]]</b><span class="desc">[[Jobs, people, FAQs &mdash; the build's lists.]]</span></div>
+        <div class="slot"><span class="min">25&ndash;30 min</span><b>Who does what</b><span class="desc">Updates, backups, reporting a problem.</span></div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <h2><span class="num"></span>What the site is built on</h2>
+      <p>You don't need to know how any of this works internally &mdash; but knowing the names helps when you see them in the dashboard or need to describe a problem.</p>
+      <div class="table-scroll">
+        <table>
+          <tr><th>Piece</th><th>What it does</th></tr>
+          <tr><td><strong>WordPress</strong></td><td>The platform everything runs on. You log in at <code>[[client-domain.com]]/wp-admin</code> &mdash; this is where ~95% of your editing happens.</td></tr>
+          <tr><td><strong>Bricks Builder</strong></td><td>The page builder used to design the layouts. [[variant: "You'll only open it for a handful of specific edits (<a href="#bricks">the Bricks section</a>)." OR "Locked to [[Studio]] accounts &mdash; your team edits content without ever touching it."]]</td></tr>
+          <tr><td><strong>ACF (custom fields)</strong></td><td>The neat labeled fields you see when editing a page &mdash; headline, body text, image slots. Edit the field, hit Update, and the page rebuilds itself with the new content in the right design.</td></tr>
+          <!-- variant: keep this row for [[SEOPress]] builds; delete it when meta is set in Bricks -->
+          <tr><td><strong>[[SEOPress]]</strong></td><td>Handles search-engine titles, descriptions, and the sitemap (<a href="#seo">the SEO section</a>).</td></tr>
+          <tr><td><strong>[[hosting panel]]</strong></td><td>The hosting control panel. Backups and restores live here (<a href="#backups">the backups section</a>).</td></tr>
+          <tr><td><strong>[[Cloudflare]]</strong></td><td>Sits in front of the site handling the domain and security. Nothing to manage day to day.</td></tr>
+          <!-- add rows for the build's own services: forms, payments, newsletters, consent tool -->
+        </table>
+      </div>
+    </section>
+
+    <section id="rules">
+      <h2><span class="num"></span>Three golden rules</h2>
+      <ol class="steps">
+        <li><strong>Edit content in the WordPress admin, not in Bricks.</strong> Almost everything &mdash; page text, images, [[the build's content types]] &mdash; is edited through normal WordPress screens and custom fields. If you find yourself opening the Bricks editor for a routine text change, there's probably an easier (and safer) field for it.</li>
+        <!-- variant: keep ONE of the next two rules -->
+        <li><strong>Bookend your edits with backups.</strong> Take a manual [[hosting panel]] backup before you start an editing session and another after you've finished and confirmed the site looks right (<a href="#backups">the backups section</a>). Each one takes about a minute, and together they turn any mistake into a non-event: the "before" is your undo button, the "after" preserves your finished work.</li>
+        <li><strong>Tell [[Studio]] before big batches.</strong> Planning a large run of changes &mdash; a new team roster, a year of entries? Let us know first so a fresh backup goes in ahead of it. Day-to-day edits need no ceremony; we back the site up on a schedule.</li>
+        <li><strong>When in doubt, stop before you click.</strong> Anything in the "hands-off zones" (<a href="#handsoff">the hands-off zones</a>) is developer territory &mdash; send it to [[Studio]] (<a href="#help">how to reach us</a>). A two-minute question costs far less than a repair job.</li>
+      </ol>
+    </section>
+
+    <section id="login">
+      <h2><span class="num"></span>Your login and roles</h2>
+      <div class="grid2">
+        <div class="card"><h3>Add /wp-admin to the site</h3><p>Log in at <code>[[client-domain.com]]/wp-admin</code>. Bookmark it. Forgot your password? Click <strong>Lost your password?</strong> on the login screen; if the email never arrives, ask [[Studio]] for a reset link.</p></div>
+        <div class="card"><h3>One person, one login</h3><p>Everyone gets their own account, so the site's history shows who changed what, and one person can be switched off without locking out everyone. Ask [[Studio]] to add or remove people.</p></div>
+        <div class="card"><h3>Security basics</h3><p>Use a long, unique password, ideally from a password manager. Be wary of emails "from WordPress" or "from your host" asking you to log in &mdash; type the address yourself instead. And tell [[Studio]] the day someone leaves, so their login comes out the same day.</p></div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <tr><th>Role</th><th>On this site they can&hellip;</th><th>Good for</th></tr>
+          <tr><td><strong>Editor</strong></td><td>Publish and edit all content: posts, pages' custom fields, and every list.</td><td>Whoever runs the site day to day.</td></tr>
+          <tr><td><strong>Author</strong></td><td>Write and publish their own posts.</td><td>Staff who post regularly.</td></tr>
+          <tr><td><strong>Contributor</strong></td><td>Write drafts for an Editor to review and publish.</td><td>Occasional writers.</td></tr>
+          <tr><td><strong>Administrator</strong></td><td>Everything, including Bricks, plugins, and users.</td><td>[[variant: "[[Studio]], plus the owner's break-glass account." OR "[[Studio]] only."]]</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="map">
+      <h2><span class="num"></span>Where each thing is edited</h2>
+      <p>Your quick-reference map. <span class="where wp">WP Admin</span> means the normal WordPress dashboard &mdash; safe, everyday territory. <span class="where bricks">Bricks</span> means the page builder &mdash; fine with the workflow in <a href="#bricks">the Bricks section</a>. <span class="where dev">Developer</span> means send it to us.</p>
+      <div class="table-scroll">
+        <table>
+          <tr><th>You want to change&hellip;</th><th>Where</th><th>How</th></tr>
+          <tr><td>Blog posts</td><td><span class="where wp">WP Admin</span></td><td><code>Posts</code> &mdash; standard WordPress editor</td></tr>
+          <tr><td>[[Each custom post type: Jobs / People / FAQs / Testimonials&hellip; one row each]]</td><td><span class="where wp">WP Admin</span></td><td><code>[[Menu name]]</code> &mdash; each entry is its own short form</td></tr>
+          <tr><td>Page text &amp; images ([[list the main pages]])</td><td><span class="where wp">WP Admin</span></td><td><code>Pages</code> &rarr; edit the page &rarr; fill in the labeled custom fields &rarr; Update</td></tr>
+          <tr><td>Site-wide facts ([[phone, address, hours, social links]])</td><td><span class="where wp">WP Admin</span></td><td><code>[[Site details]]</code> options screen &mdash; change it once, it updates everywhere it appears</td></tr>
+          <tr><td>Search titles &amp; descriptions</td><td>[[<span class="where wp">WP Admin</span> OR <span class="where dev">Developer</span>]]</td><td>[[variant: "[[SEOPress]] panel on each page/post" OR "set in the page design (Bricks) &mdash; send changes to [[Studio]]"]] (<a href="#seo">the SEO section</a>)</td></tr>
+          <tr><td>The few layout-level text/image spots not covered by fields</td><td><span class="where bricks">Bricks</span></td><td>Edit with Bricks, using the safe workflow in <a href="#bricks">the Bricks section</a></td></tr>
+          <tr><td>Header, footer, menus</td><td><span class="where bricks">Bricks</span></td><td>Bricks templates &mdash; small text swaps only; anything structural is developer work</td></tr>
+          <tr><td>New pages, new sections, design changes, custom code</td><td><span class="where dev">Developer</span></td><td>Send [[Studio]] the request (<a href="#help">how to reach us</a>)</td></tr>
+        </table>
+      </div>
+
+      <h3>Your admin menu, decoded</h3>
+      <figure class="mock">
+        <div class="mock-cap"><span>WordPress admin menu</span><span>Editor's view</span></div>
+        <div class="scrollx"><div class="admin">
+          <div class="menu" aria-label="Admin menu">
+            <div>Dashboard<span class="m m-go"></span></div>
+            <div>[[Site details]]<span class="m m-care"></span></div>
+            <div class="sep"></div>
+            <div>Posts<span class="m m-go"></span></div>
+            <div>Media<span class="m m-go"></span></div>
+            <div>Pages<span class="m m-care"></span></div>
+            <div>[[CPT one]]<span class="m m-go"></span></div>
+            <div>[[CPT two]]<span class="m m-go"></span></div>
+            <div class="sep"></div>
+            <div>Profile<span class="m m-go"></span></div>
+            <div>Tools<span class="m m-stop"></span></div>
+          </div>
+          <div class="admin-key"><dl>
+            <div><dt>Posts, Media, and the lists</dt><dd>Your everyday tools &mdash; <a href="#everyday">everyday edits</a> and <a href="#checklist-sec">the pre-publish checklist</a>.</dd></div>
+            <div><dt>Pages</dt><dd>Edit the labeled custom fields; the main editing area [[variant: "holds the page body" OR "is blank by design &mdash; wording lives in the page's design, so wording changes go to [[Studio]]"]].</dd></div>
+            <div><dt>Profile and Tools</dt><dd>Profile has your name, email, and password. Tools is WordPress housekeeping you won't need.</dd></div>
+            <div><dt>Not in your menu</dt><dd>Bricks, its templates, plugins, themes, users, and settings. [[variant: "These are hands-off (<a href="#handsoff">the hands-off zones</a>)." OR "These are [[Studio]] territory, so your account doesn't see them."]]</dd></div>
+          </dl></div>
+        </div></div>
+      </figure>
+    </section>
+
+    <section id="everyday">
+      <h2><span class="num"></span>Everyday edits, step by step</h2>
+
+      <h3>Publish a blog post</h3>
+      <figure class="mock">
+        <div class="mock-cap"><span>Posts &rsaquo; Add New Post</span><span>Simplified</span></div>
+        <div class="scrollx"><div class="editor" aria-hidden="true">
+          <div class="ed-top"><span class="back">&#9664; Posts</span><span class="sp"></span><span class="fake">Save draft</span><span class="fake">Preview</span><span class="fake solid">Publish</span><span class="pin">5</span></div>
+          <div class="ed-main">
+            <div class="ed-canvas">
+              <div class="ed-title"><span class="pin">1</span>[[A specific, well-spelled headline]]</div>
+              <div class="ed-p"><span class="pin">2</span><span>[[The story itself. Use + or type / to add headings, images, lists, or quotes&hellip;]]</span></div>
+              <div class="ed-add"><i>+</i>Type / to choose a block</div>
+            </div>
+            <!-- variant: keep for [[SEOPress]] builds; delete this box and callout 6 when meta is set in Bricks -->
+            <div class="ed-box"><div class="hd"><span class="pin">6</span>[[SEOPress]]</div><div class="ed-field">[[Meta title &mdash; 50&ndash;60 characters]] | [[Client Name]]</div><div class="ed-field">[[Meta description &mdash; a one-line pitch for the post, 140&ndash;155 characters&hellip;]]</div></div>
+          </div>
+          <div class="ed-side">
+            <div class="tabs"><span>Post</span><span>Block</span></div>
+            <div class="ed-row"><span>Status</span><span class="v">Draft</span></div>
+            <div class="ed-row"><span>Publish</span><span class="v">Immediately</span></div>
+            <div class="ed-row"><span>Link</span><span class="v" style="font-family:'JetBrains Mono',monospace;font-size:0.7rem">/[[the-post-slug]]&hellip;</span></div>
+            <div class="ed-row"><span class="l"><span class="pin">4</span><strong>Categories</strong></span><span class="v">[[Category]]</span></div>
+            <div class="ed-row"><span class="l"><span class="pin">3</span><strong>Featured image</strong></span><span class="v">Set</span></div>
+          </div>
+        </div></div>
+        <ol class="callouts">
+          <li><span class="pin">1</span><span><b>Title.</b> The headline on the [[blog]] and in search results. Keep it specific.</span></li>
+          <li><span class="pin">2</span><span><b>Body.</b> The story itself. Use + or type <code>/</code> for headings, images, lists, and quotes &mdash; headings via the Heading block, never bold text.</span></li>
+          <li><span class="pin">3</span><span><b>Featured image.</b> The thumbnail on the archive and the image used when the post is shared.</span></li>
+          <li><span class="pin">4</span><span><b>Category.</b> Pick one so the post files correctly on the archive.</span></li>
+          <li><span class="pin">5</span><span><b>Publish.</b> Click once to review, then Publish again to make it live.</span></li>
+          <li><span class="pin">6</span><span><b>SEO panel.</b> The meta title and description Google shows &mdash; guidelines in <a href="#seo">the SEO section</a>.</span></li>
+        </ol>
+      </figure>
+      <ol class="steps">
+        <li>Go to <code>Posts &rarr; Add New</code>. Write the title and body in the standard editor.</li>
+        <li>Set a <strong>featured image</strong> (right sidebar) &mdash; the thumbnail on the archive and the image used when the post is shared. Landscape images work best.</li>
+        <li>Pick a <strong>category</strong> so the post files correctly.</li>
+        <li>[[If [[SEOPress]]: "Scroll to the [[SEOPress]] panel below the editor and fill in the meta title and description (<a href="#seo">the SEO section</a>)." Else delete.]]</li>
+        <li>Click <strong>Preview</strong> to check it, then <strong>Publish</strong>. The post appears on <code>/[[blog]]/</code> automatically.</li>
+      </ol>
+
+      <h3>[[Add or update a CPT entry &mdash; repeat this block per content type]]</h3>
+      <ol class="steps">
+        <li>Go to <code>[[Menu name]]</code> in the admin sidebar. Click <strong>Add New</strong> (or open an existing entry).</li>
+        <li>Fill in the labeled fields &mdash; [[name the key fields]].</li>
+        <li>[[Status/group/order mechanics for this type, e.g. "choose Active; Active entries show automatically."]]</li>
+        <li>Publish, then check the live page.</li>
+      </ol>
+      <div class="callout tip">
+        <span class="callout-label">Tip</span>
+        <p>[[Type-specific tip, e.g. "Close entries, don't delete them &mdash; a closed entry keeps its content for next time."]]</p>
+      </div>
+
+      <h3>Update page content (custom fields)</h3>
+      <ol class="steps">
+        <li>Go to <code>Pages</code> and open the page you want to change.</li>
+        <li>Instead of one big text box, you'll see labeled <strong>custom fields</strong> grouped by section of the page &mdash; headlines, paragraphs, image slots, stats. Edit the field you need.</li>
+        <li>Click <strong>Update</strong>, then view the live page to confirm. The design applies itself &mdash; you only supply the words and images.</li>
+      </ol>
+      <div class="callout careful">
+        <span class="callout-label">Careful</span>
+        <p>Keep replacement text roughly the length of what it replaces. The design flexes, but a headline three times longer than the original will look crowded &mdash; check the live page, including on your phone.</p>
+      </div>
+
+      <h3>Working with images</h3>
+      <ul class="plain">
+        <li>Upload via <code>Media &rarr; Add New</code>, or directly from any image field.</li>
+        <li>Resize large photos before uploading (2,000px on the long edge is plenty; squoosh.app or Preview on a Mac both work) &mdash; phone photos straight off the camera are huge and slow the site down.</li>
+        <li>Name files before uploading: <code>[[maria-garcia-headshot.jpg]]</code>, not <code>IMG_4821.jpg</code>. The site uses filenames as a fallback description.</li>
+        <li>Give every image <strong>alt text</strong> (a one-line description of what's in it). It matters for accessibility and SEO, and the site has been built to keep this consistent.</li>
+        <li>When replacing an image in a field, match the general shape (wide vs. tall) of the one it replaces.</li>
+        <li><strong>Videos</strong> go on YouTube or Vimeo, then get linked &mdash; never upload video files. <strong>PDFs</strong> are fine to upload and link.</li>
+      </ul>
+      <!-- optional: the per-slot image-size table (shape / width / file budget), one row per image slot in the build -->
+    </section>
+
+    <section id="checklist-sec">
+      <h2><span class="num"></span>Before you hit Publish</h2>
+      <p>Thirty seconds here saves an embarrassed edit later. The list remembers itself between visits.</p>
+      <div class="check" id="checklist">
+        <label><input type="checkbox"><span>The title is specific and spelled correctly.</span></label>
+        <label><input type="checkbox"><span>A category [[/ group / status]] is picked.</span></label>
+        <label><input type="checkbox"><span>The featured image is set and looks right.</span></label>
+        <label><input type="checkbox"><span>Subheadings use the Heading block (never bold text) and images have alt text.</span></label>
+        <label><input type="checkbox"><span>[[If [[SEOPress]]: "The meta title and description are filled in." Else swap for a build-specific check.]]</span></label>
+        <label><input type="checkbox"><span>I previewed it &mdash; on my phone too.</span></label>
+        <div class="check-foot"><span id="check-count">0 of 6 done</span><button type="button" id="check-reset">clear</button></div>
+      </div>
+    </section>
+
+    <!-- variant: keep ONE of the two Bricks sections -->
+    <section id="bricks">
+      <h2><span class="num"></span>Bricks Builder &mdash; the other 5%</h2>
+      <p>Bricks is the visual builder the site's layouts were designed in. A few pieces of content live directly in those layouts, so occasionally you'll need to open it. It's powerful &mdash; which is exactly why the workflow below stays deliberately narrow.</p>
+      <h3>The safe editing workflow</h3>
+      <ol class="steps">
+        <li>Open the page under <code>Pages</code>, then click <strong>Edit with Bricks</strong> in the top admin bar.</li>
+        <li>Click directly on the text or image you need to change. The panel on the left shows its settings; edit the text there (or double-click the text to type in place).</li>
+        <li>Change <em>content only</em> &mdash; words, an image swap. Don't drag elements, don't delete them, and don't touch the Style tab.</li>
+        <li>Click <strong>Save</strong> (top bar), then view the live page to confirm.</li>
+        <li>If you click something and the panel shows settings you don't recognize &mdash; press <strong>Esc</strong> and don't save; nothing changes until you hit Save. If that edit still needs to happen, treat it as developer work (<a href="#help">how to reach us</a>).</li>
+      </ol>
+      <div class="callout stop">
+        <span class="callout-label">Don't</span>
+        <p>Never delete or drag elements in the structure panel, edit the header/footer/menu templates beyond a text swap, or change anything under Bricks &rarr; Settings. These control the whole site at once.</p>
+      </div>
+      <h3>Bricks resources worth bookmarking</h3>
+      <div class="resources">
+        <a href="https://academy.bricksbuilder.io/">
+          <span class="r-name">Bricks Academy</span>
+          <span class="r-desc">Official documentation &mdash; every element and setting explained.</span>
+          <span class="r-url">academy.bricksbuilder.io</span>
+        </a>
+        <a href="https://www.youtube.com/@bricksbuilder">
+          <span class="r-name">Bricks on YouTube</span>
+          <span class="r-desc">Official video walkthroughs; good for seeing the editor in motion.</span>
+          <span class="r-url">youtube.com/@bricksbuilder</span>
+        </a>
+        <a href="https://forum.bricksbuilder.io/">
+          <span class="r-name">Bricks Forum</span>
+          <span class="r-desc">Community Q&amp;A &mdash; most "how do I&hellip;" questions are already answered here.</span>
+          <span class="r-url">forum.bricksbuilder.io</span>
+        </a>
+      </div>
+    </section>
+    <!-- variant B: builder locked
+    <section id="bricks">
+      <h2><span class="num"></span>Why the page builder is locked</h2>
+      <p>Only [[Studio]] accounts can open Bricks, the builder the site was designed in. One wrong drag in a page builder can shift a layout on every page that shares it. Locking it means your team edits content freely without risking the design &mdash; and anything that genuinely needs a layout change goes to [[Studio]] (<a href="#help">how to reach us</a>).</p>
+    </section>
+    -->
+
+    <!-- variant: keep for store builds (WooCommerce); for no-store sites replace with the single "No store, by design" card below -->
+    <section id="store">
+      <h2><span class="num"></span>The store</h2>
+      <p>The shop runs on WooCommerce inside the same admin. Orders and products are everyday territory; the checkout's plumbing is not.</p>
+      <h3>Orders</h3>
+      <ul class="plain">
+        <li>Orders arrive under <code>WooCommerce &rarr; Orders</code> [[and by email to [[address]]]]. Open one to see items, totals, and the customer's details.</li>
+        <li>When an order ships or is picked up, set its status to <strong>Completed</strong>.</li>
+        <li><strong>Refunds</strong> start from the order screen (Refund button), which sends the money back through [[payment processor]]. Card numbers never live on the site &mdash; the processor holds them.</li>
+      </ul>
+      <h3>Products</h3>
+      <ul class="plain">
+        <li>Edit price, stock, photos, and descriptions under <code>Products</code> &mdash; never in Bricks. The product pages redraw themselves.</li>
+        <li><strong>Retire a product by switching it to Draft, never Delete.</strong> Past orders reference it; deleting leaves holes in your own records.</li>
+        <li>After changing prices or adding a product, load the live page and click through to the cart once.</li>
+      </ul>
+      <div class="callout careful">
+        <span class="callout-label">Careful</span>
+        <p>Prices, tax, and shipping settings are customer-facing money. Double-check amounts before saving, and leave <code>WooCommerce &rarr; Settings</code> (tax, shipping zones, payment connections) to [[Studio]].</p>
+      </div>
+    </section>
+    <!-- variant B: no store
+    <section id="store">
+      <h2><span class="num"></span>No store, by design</h2>
+      <p>The site takes no payments itself. Every [[Donate / Book / Pay]] button links to [[service]], so card numbers and customer records never touch the website &mdash; and if the site is ever down, [[paying / giving / booking]] still works over there. Change amounts, receipts, and campaigns in [[service]]'s own dashboard; if its link changes, update it in [[Site details]].</p>
+    </section>
+    -->
+
+    <section id="seo">
+      <h2><span class="num"></span>SEO &amp; meta info [[([[SEOPress]])]]</h2>
+      <!-- variant: keep ONE of the two blocks -->
+      <p>Every page and post has an <strong>[[SEOPress]] panel</strong> below its editor. Two fields matter day to day:</p>
+      <ul class="plain">
+        <li><strong>Meta title</strong> &mdash; the headline in Google results. Aim for <strong>50&ndash;60 characters</strong>, ending in <code>| [[Client Name]]</code>.</li>
+        <li><strong>Meta description</strong> &mdash; the sentence or two under it. Aim for <strong>140&ndash;155 characters</strong>; write it like a one-line pitch for the page.</li>
+      </ul>
+      <p>The panel shows a live Google preview and character counts as you type. Every existing page already has these written &mdash; mostly you'll just add them to <strong>new posts</strong> and adjust when a page's focus changes.</p>
+      <!-- variant B: meta is set in Bricks (kit default), no SEO plugin
+      <p>Search titles and descriptions are part of the page design, set in Bricks &mdash; so there's no SEO box on your editing screens, and nothing to fill in day to day. Posts title themselves: the post title, then "| [[Client Name]]", and a clear, specific headline and first paragraph do the search work. When a page's meta should change (its focus shifts, a service renames), send [[Studio]] the page and the new wording.</p>
+      -->
+      <div class="callout careful">
+        <span class="callout-label">Careful</span>
+        <p><strong>Don't change page URLs (slugs).</strong> Renaming <code>/[[about]]/</code> to something else breaks every link and Google listing pointing at it. If a URL really needs to change, a redirect has to be set up first &mdash; that's a developer task (<a href="#help">how to reach us</a>).</p>
+      </div>
+      <h3>Good to know</h3>
+      <ul class="plain">
+        <li>The sitemap lives at <code>[[client-domain.com]]/[[sitemaps.xml]]</code> and updates itself &mdash; nothing to maintain.</li>
+        <li>[[If connected: "Google Search Console and Bing Webmaster Tools are connected and show how the site performs in search."]]</li>
+        <li>[[If analytics: "Your traffic lives in [[GA4]] at analytics.google.com under [[account]] &mdash; worth a monthly glance alongside Search Console." Else delete.]]</li>
+        <li>Legal pages (privacy, cookies, terms) are deliberately hidden from search engines &mdash; that's intentional, leave as is.</li>
+      </ul>
+    </section>
+
+    <section id="consent">
+      <h2><span class="num"></span>Tracking &amp; the consent banner</h2>
+      <p>The site ships with a consent banner that keeps non-essential tracking from loading until a visitor opts in. That's not decoration &mdash; state privacy laws treat trackers that fire before consent as a legal liability, and the site has been tested to load clean.</p>
+      <ul class="plain">
+        <li><strong>Never paste a tracking snippet anywhere</strong> &mdash; no analytics tags, ad pixels, chat widgets, or "just one line of code" from a vendor. Even in a post. One ungated tracker undoes the compliance work.</li>
+        <li><strong>Want a new tool?</strong> (A pixel, analytics, chat, booking widget.) Send it to [[Studio]]: we wire it through the consent tool, verify nothing fires before consent, and keep the record of what runs.</li>
+        <li><strong>The banner's wording and behavior are configured</strong> &mdash; leave its settings alone, and tell us if it ever stops appearing for new visitors (test in a private window).</li>
+        <li><strong>Legal pages ([[privacy, cookies, terms]]) maintain themselves</strong> [[via the policy service]] &mdash; never edit their text by hand; hand-edits are overwritten and can put the pages out of step with the law.</li>
+      </ul>
+    </section>
+
+    <section id="domain">
+      <h2><span class="num"></span>Your domain and email</h2>
+      <div class="grid2">
+        <div class="card"><h3>The domain is yours to renew</h3><p><code>[[client-domain.com]]</code> is registered at [[registrar]] under your account and renews [[date / auto-renews]]. Keep the card on file current: a lapsed domain takes down the website <em>and</em> your email the same day, and recovering one can take weeks.</p></div>
+        <div class="card"><h3>DNS goes through [[Studio]]</h3><p>The domain's records live in [[Cloudflare]] and control where the site and your email point. Record changes (new mail provider, a verification code a vendor asks for) are quick for us and risky by hand &mdash; send them over instead of editing.</p></div>
+        <div class="card"><h3>Email is separate from the website</h3><p>Your mail runs on [[provider]], not on the web server. Site maintenance never touches your inbox, and a site outage doesn't stop your email &mdash; or the reverse.</p></div>
+        <div class="card"><h3>Email "from the website"</h3><p>Form notifications and [[store receipts]] are sent by the site through [[SMTP service]]. If they stop arriving, check spam first, then tell [[Studio]] &mdash; and tell us when the person who should receive them changes.</p></div>
+      </div>
+    </section>
+
+    <!-- variant: keep ONE of the two backups sections -->
+    <section id="backups">
+      <h2><span class="num"></span>Backups &amp; restore ([[hosting panel]])</h2>
+      <p>[[hosting panel]] is the hosting panel at <code>[[panel login URL]]</code>. Automatic backups run on a schedule, so there is always a recent copy of the site &mdash; but the habit that makes you bulletproof is the <strong>backup bookend</strong>: one manual backup <strong>before</strong> you start editing, and one <strong>after</strong> you've finished and checked your work.</p>
+      <h3>Take a manual backup</h3>
+      <ol class="steps">
+        <li>Log in at <code>[[panel login URL]]</code> and go to <strong>Sites</strong>.</li>
+        <li>Click <strong>[[client-domain.com]]</strong> to open its settings, then open the <strong>Backups</strong> tab.</li>
+        <li>Click <strong>Backup Now</strong> and give it a name you'll recognize &mdash; <code>before-team-updates-[[mon-year]]</code> going in, <code>after-team-updates-[[mon-year]]</code> coming out.</li>
+        <li>Wait for it to appear in the backups list &mdash; usually a minute or two. Done.</li>
+      </ol>
+      <h3>Restore from a backup</h3>
+      <ol class="steps">
+        <li>Same place: <strong>Sites &rarr; [[client-domain.com]] &rarr; Backups</strong>. Find the backup you want.</li>
+        <li>Use its <strong>restore</strong> action and confirm.</li>
+        <li>The site rolls back within a few minutes. Check the live site afterward.</li>
+      </ol>
+      <div class="callout stop">
+        <span class="callout-label">Important</span>
+        <p>A restore rewinds the <em>entire site</em> to that moment &mdash; every edit, post, and form entry made since that backup is gone. Fine for undoing this morning's mistake; not for undoing one thing from last week (a single post can usually be fixed from its <strong>Revisions</strong> instead). If you're unsure which backup to use, get a developer's eyes on it first &mdash; restoring the wrong one is the one mistake a backup can't fix.</p>
+      </div>
+    </section>
+    <!-- variant B: [[Studio]] maintenance plan holds backups
+    <section id="backups">
+      <h2><span class="num"></span>Backups ([[Studio]] handles these)</h2>
+      <p>Automatic backups run on a schedule, and [[Studio]] takes an extra one before any update or design change. You never need to take or restore one yourself.</p>
+      <div class="callout stop">
+        <span class="callout-label">Important</span>
+        <p>A restore rewinds the <em>entire site</em>, losing everything since that backup &mdash; which is why restores go through [[Studio]]. A botched post or entry usually doesn't need one: open it and use <strong>Revisions</strong> in the sidebar to bring back an earlier version yourself.</p>
+      </div>
+    </section>
+    -->
+
+    <!-- variant: keep ONE of the two maintenance sections -->
+    <section id="maintenance">
+      <h2><span class="num"></span>Monthly maintenance (owned by your team)</h2>
+      <p>The site is not under an ongoing care plan, so nobody else is watching updates and backups for you. A once-a-month rhythm on your calendar keeps it secure and fast:</p>
+      <ol class="steps">
+        <li><strong>Backup first.</strong> Manual [[hosting panel]] backup, named for the date (<a href="#backups">the backups section</a>). Confirm the automatic schedule has been producing recent backups too.</li>
+        <li><strong>Update plugins</strong> at <code>Dashboard &rarr; Updates</code> &mdash; one at a time, not "select all". After each, load the homepage and one inner page.</li>
+        <li><strong>WordPress core, the theme, and Bricks itself get extra care.</strong> Update them last, one at a time, and click through every main page afterward. If anything looks off, restore the step-1 backup, screenshot what broke, and hold that update for [[Studio]].</li>
+        <li><strong>Spot-check the site:</strong> submit the contact form to confirm it arrives, click through the main pages, glance at the site on your phone. Then take the "after" backup.</li>
+        <li><strong>Glance at search:</strong> [[Google Search Console]] for red flags. Anything unfamiliar, screenshot it.</li>
+      </ol>
+      <p><strong>Licenses are yours to hold.</strong> Bricks, ACF Pro, and the other premium tools require active licenses purchased and renewed by [[Client]] &mdash; the full list is in your Website Owner's Manual. A lapsed license doesn't take the site down, but it silently stops delivering updates, and running unpatched premium plugins is how sites get compromised.</p>
+    </section>
+    <!-- variant B: [[Studio]] care plan
+    <section id="maintenance">
+      <h2><span class="num"></span>Maintenance ([[Studio]] keeps the machinery running)</h2>
+      <div class="grid2">
+        <div class="card"><h3>Updates</h3><p>WordPress, Bricks, and plugins are updated by [[Studio]], checked afterward, and fixed if anything moves. You can ignore "update available" notices.</p></div>
+        <div class="card"><h3>Backups</h3><p>Automatic on a schedule, plus a fresh one before every update or design change.</p></div>
+        <div class="card"><h3>Licenses</h3><p>Bricks, ACF Pro, and the other premium tools stay current &mdash; [[Studio]] tracks the renewals.</p></div>
+        <div class="card"><h3>Your part in security</h3><p>Use a long, unique password (ideally from a password manager), be wary of emails "from WordPress" asking you to log in, and tell us the day someone leaves so their login comes out.</p></div>
+      </div>
+      <div class="callout careful">
+        <span class="callout-label">Why didn't my change show up?</span>
+        <p>The site is cached so it loads fast, and you may briefly see the older copy. Wait a minute, then hard-refresh (<code>Cmd+Shift+R</code> / <code>Ctrl+Shift+R</code>) or open the page in a private window. Still old after 15 minutes? Tell [[Studio]].</p>
+      </div>
+    </section>
+    -->
+
+    <section id="fast">
+      <h2><span class="num"></span>Keeping the site fast</h2>
+      <p>The site launched scoring <strong>90+ in all four Google PageSpeed categories, measured on mobile</strong> &mdash; and you can check that claim any time: paste <code>[[client-domain.com]]</code> into <strong>pagespeed.web.dev</strong>. Scores aren't static, though; they're spent by what gets added. The three things that protect them:</p>
+      <ul class="plain">
+        <li><strong>Image discipline.</strong> The sizing habits in <a href="#everyday">the images part of everyday edits</a> are most of the battle &mdash; one 8&nbsp;MB camera photo on the homepage is the fastest way to lose ten points.</li>
+        <li><strong>No raw embeds.</strong> A pasted YouTube player, map, or chat widget loads a megabyte of script before a visitor touches it and can cost 15&ndash;25 points on its own. Send embeds to [[Studio]] &mdash; we add them with a lightweight treatment that loads on click and keeps the score.</li>
+        <li><strong>Lean add-ons.</strong> Every plugin and third-party script spends performance budget on every page. Ask before adding one; often the site already does the thing, or can, without it.</li>
+      </ul>
+    </section>
+
+    <section id="handsoff">
+      <h2><span class="num"></span>Hands-off zones</h2>
+      <p>These run the machinery of the site. Changing them can take pages down or quietly break things that are hard to trace &mdash; leave them alone, and route any change you need here through [[Studio]]:</p>
+      <ul class="plain">
+        <li><strong>WPCodeBox / code snippets</strong> &mdash; custom code powering [[the build's behaviors]].</li>
+        <li><strong>ACF field settings</strong> (the <code>ACF</code> menu itself) &mdash; editing field <em>definitions</em> can disconnect content from the design. Filling in fields on a page is always fine; this menu is not.</li>
+        <li><strong>Theme files, Bricks settings, and Bricks global classes/styles.</strong></li>
+        <li><strong>Plugins</strong> &mdash; [[variant: "updating is fine (<a href="#maintenance">the maintenance section</a>); installing, deactivating, or deleting is not." OR "all plugin changes are [[Studio]] territory."]]</li>
+        <li><strong>[[Cloudflare]] and [[hosting panel]] server settings</strong> [[variant: "&mdash; everything in [[hosting panel]] outside the Backups tab." OR "."]]</li>
+        <li><strong>User roles</strong> &mdash; new WordPress users or permission changes are [[Studio]] requests.</li>
+      </ul>
+    </section>
+
+    <section id="help">
+      <h2><span class="num"></span>When something breaks</h2>
+      <div class="table-scroll">
+        <table>
+          <tr><th>What you see</th><th>Try this first</th><th>Then</th></tr>
+          <tr><td><strong>My change isn't showing</strong></td><td>Wait a minute, hard-refresh (<code>Cmd+Shift+R</code> / <code>Ctrl+Shift+R</code>), or try a private window.</td><td>Tell [[Studio]] after 15 minutes.</td></tr>
+          <tr><td><strong>I messed up a post or entry</strong></td><td>Open it and use sidebar &rarr; <strong>Revisions</strong> to restore an earlier version.</td><td>[[Studio]] can help recover it.</td></tr>
+          <tr><td><strong>An entry isn't showing on the site</strong></td><td>Check it's <strong>Published</strong>, not Draft [[+ the build's gotchas: needs a group / status / year]].</td><td>Send [[Studio]] the entry's name.</td></tr>
+          <tr><td><strong>I can't log in</strong></td><td>"Lost your password?" on the login screen. Check spam.</td><td>[[Studio]] can send a reset link.</td></tr>
+          <tr><td><strong>The site is down or shows an error</strong></td><td>Check on your phone with Wi-Fi off.</td><td>Contact [[Studio]] right away with a screenshot.</td></tr>
+          <tr><td><strong>Form emails stopped</strong></td><td>Check spam.</td><td>[[Studio]] tests the form.</td></tr>
+        </table>
+      </div>
+      <h3>What to send us</h3>
+      <div class="report">Page:     the link with the problem
+What:     what you expected vs. what happened
+Steps:    what you clicked or changed just before
+When:     date and time it started
+Device:   computer or phone, and browser
+Picture:  a screenshot</div>
+      <p>Don't repeat whatever caused the problem while you wait, and don't restore a backup on your own. [[variant: "Support is billed hourly at the current rate &mdash; you'll get an estimate before any work starts." OR "Support is covered by your maintenance plan; bigger changes get a quote first."]] If you're ever unsure whether an edit is safe, ask the question first &mdash; a few minutes up front is always cheaper than repair work.</p>
+    </section>
+
+    <section id="glossary">
+      <h2><span class="num"></span>Glossary</h2>
+      <dl class="glossary">
+        <div><dt>Admin</dt><dd>The private back end at /wp-admin where you manage content.</dd></div>
+        <div><dt>Post vs. page</dt><dd>Posts are dated items like news. Pages are permanent, like About or Contact.</dd></div>
+        <div><dt>Custom fields</dt><dd>The labeled boxes on pages and entries (made with ACF). Fill them in; the design does the rest.</dd></div>
+        <div><dt>Featured image</dt><dd>The main photo of a post or entry &mdash; the thumbnail and share image.</dd></div>
+        <div><dt>Slug</dt><dd>The end of an address, like <code>/about</code>. Don't change these on live pages.</dd></div>
+        <div><dt>Category</dt><dd>The kind of post, shown on the archive and used for filtering.</dd></div>
+        <div><dt>Bricks</dt><dd>The page builder the site was designed in.</dd></div>
+        <div><dt>Template</dt><dd>A design reused for every entry of a kind [[e.g. "every job page"]].</dd></div>
+        <div><dt>Revisions</dt><dd>WordPress's saved history of a post &mdash; your per-post undo button.</dd></div>
+        <div><dt>Cache</dt><dd>Saved copies of pages that make the site fast, and can make changes slow to appear.</dd></div>
+        <div><dt>Backup</dt><dd>A saved copy of the whole site that can be restored.</dd></div>
+        <div><dt>Alt text</dt><dd>A written description of an image for screen readers and Google.</dd></div>
+        <div><dt>Consent banner</dt><dd>The popup that holds back tracking until a visitor opts in. Legally load-bearing.</dd></div>
+        <div><dt>Tracker</dt><dd>Any third-party script that watches visitors: analytics, ad pixels, chat widgets.</dd></div>
+        <div><dt>DNS</dt><dd>The domain's address book &mdash; it points the name at the website and your email.</dd></div>
+        <div><dt>Registrar</dt><dd>Where the domain name itself is rented and renewed.</dd></div>
+        <div><dt>[[WooCommerce]]</dt><dd>[[The store system: products, orders, and the checkout. Delete if no store.]]</dd></div>
+      </dl>
+    </section>
+
+    <footer>
+      <span class="wordmark">[[your-studio]]<span class="tld">.com</span></span> &middot; prepared [[mon year]] &middot; handoff guide for [[client-domain.com]] &middot; template by <a href="https://webwerks.dev">webwerks.dev</a>
+    </footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-toggle');
+    var stored = null;
+    try { stored = localStorage.getItem('ww-theme'); } catch (e) {}
+    if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+
+    function effective() {
+      var t = root.getAttribute('data-theme');
+      if (t === 'dark' || t === 'light') return t;
+      try {
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      } catch (e) { return 'dark'; }
+    }
+    function render() { btn.textContent = 'theme: ' + effective(); }
+
+    btn.addEventListener('click', function () {
+      var next = effective() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('ww-theme', next); } catch (e) {}
+      render();
+    });
+    render();
+  })();
+
+  (function () {
+    var KEY = 'ww-handbook-checklist-[[client]]';
+    var wrap = document.getElementById('checklist');
+    if (!wrap) return;
+    var boxes = [].slice.call(wrap.querySelectorAll('input[type="checkbox"]'));
+    var count = document.getElementById('check-count');
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(boxes.map(function (b) { return b.checked; }))); } catch (e) {} }
+    function render() {
+      var n = boxes.filter(function (b) { return b.checked; }).length;
+      count.textContent = n + ' of ' + boxes.length + ' done' + (n === boxes.length ? ' · ready to publish' : '');
+    }
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || '[]');
+      boxes.forEach(function (b, i) { b.checked = !!s[i]; });
+    } catch (e) {}
+    boxes.forEach(function (b) { b.addEventListener('change', function () { save(); render(); }); });
+    document.getElementById('check-reset').addEventListener('click', function () {
+      boxes.forEach(function (b) { b.checked = false; });
+      save(); render();
+    });
+    render();
+  })();
+
+  (function () {
+    var links = [].slice.call(document.querySelectorAll('nav.toc a'));
+    var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    var queued = false;
+    function mark() {
+      queued = false;
+      var cur = secs[0];
+      secs.forEach(function (s) { if (s && s.getBoundingClientRect().top <= 140) cur = s; });
+      links.forEach(function (a, i) {
+        if (secs[i] === cur) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+    mark();
+  })();
+</script>
