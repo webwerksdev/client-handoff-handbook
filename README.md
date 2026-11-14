@@ -57,7 +57,7 @@ it do steps 2-4. The placeholders and variant markers are written to be machine-
 
 ## Not on WordPress?
 
-The examples are WordPress + Bricks + ACF because that's our stack, but the skeleton
+The examples are WordPress + Bricks + ACF because that's one of our common stacks, but the skeleton
 (permissions map, golden rules, publish walkthrough, checklist, backups, consent,
 domain/email boundaries, troubleshooting) fits any platform. Fork it and swap the
 WP sections for your stack's equivalents.
