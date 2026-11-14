@@ -311,6 +311,7 @@
   .card p, .card li { color: var(--muted); }
   .card p:last-child { margin-bottom: 0; }
   .grid2 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin: 0 0 16px; }
+  .grid2 .span2 { grid-column: 1 / -1; }
   .grid2 .card { margin: 0; }
   .table-scroll {
     overflow-x: auto;
@@ -627,7 +628,7 @@
       <div class="grid2">
         <div class="card"><h3>Add /wp-admin to the site</h3><p>Log in at <code>cedarsalt.example/wp-admin</code>. Bookmark it. Forgot your password? Click <strong>Lost your password?</strong> on the login screen; if the email never arrives, ask Lakeline Studio for a reset link.</p></div>
         <div class="card"><h3>One person, one login</h3><p>Everyone gets their own account, so the site's history shows who changed what, and one person can be switched off without locking out everyone. Ask Lakeline Studio to add or remove people.</p></div>
-        <div class="card"><h3>Security basics</h3><p>Use a long, unique password, ideally from a password manager. Be wary of emails "from WordPress" or "from your host" asking you to log in; type the address yourself instead. And tell Lakeline Studio the day someone leaves, so their login comes out the same day.</p></div>
+        <div class="card span2"><h3>Security basics</h3><p>Use a long, unique password, ideally from a password manager. Be wary of emails "from WordPress" or "from your host" asking you to log in; type the address yourself instead. And tell Lakeline Studio the day someone leaves, so their login comes out the same day.</p></div>
       </div>
       <div class="table-scroll">
         <table>
