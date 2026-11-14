@@ -55,6 +55,13 @@ toggle, and it prints decently too.
 The fastest route: hand this file and your project notes to your AI assistant and have
 it do steps 2-4. The placeholders and variant markers are written to be machine-legible.
 
+## Make it yours
+
+The whole skin lives in the `:root` block at the top of the file: five colors (ground,
+panel, text, muted, accent) with their light-theme overrides, and three font families.
+Swap those for your brand and the entire handbook reskins itself, both themes included.
+Two minutes, no hunting through the stylesheet.
+
 ## Not on WordPress?
 
 The examples are WordPress + Bricks + ACF because that's one of our common stacks, but the skeleton
