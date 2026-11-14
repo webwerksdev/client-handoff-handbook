@@ -19,24 +19,24 @@ before you fork it.
 
 Eighteen sections covering the whole ownership story, not just "here's the editor":
 
-1. **The training session**: a 30-minute agenda the handbook doubles as
-2. **What the site is built on**: the stack in client language
+1. **The training session** - a 30-minute agenda the handbook doubles as
+2. **What the site is built on** - the stack in client language
 3. **Three golden rules**
-4. **Login and roles**: including security basics
-5. **Where each thing is edited**: a quick-reference map with WP Admin / Bricks /
+4. **Login and roles** - including security basics
+5. **Where each thing is edited** - a quick-reference map with WP Admin / Bricks /
    Developer badges, plus an annotated drawing of the admin menu
-6. **Everyday edits, step by step**: with an annotated drawing of the post editor
-7. **A pre-publish checklist**: interactive, remembers itself between visits
-8. **Bricks Builder**: the safe-editing workflow, or the "why it's locked" variant
-9. **The store**: WooCommerce orders and products, or the no-store variant
-10. **SEO & meta**: SEO-plugin variant or meta-in-Bricks variant
-11. **Tracking & the consent banner**: why clients must never paste a snippet
-12. **Domain and email**: who renews what, and why email isn't the website
-13. **Backups & restore**: client-managed or studio-managed variants
-14. **Maintenance**: same two variants
-15. **Keeping the site fast**: how not to spend the PageSpeed score you shipped
+6. **Everyday edits, step by step** - with an annotated drawing of the post editor
+7. **A pre-publish checklist** - interactive, remembers itself between visits
+8. **Bricks Builder** - the safe-editing workflow, or the "why it's locked" variant
+9. **The store** - WooCommerce orders and products, or the no-store variant
+10. **SEO & meta** - SEO-plugin variant or meta-in-Bricks variant
+11. **Tracking & the consent banner** - why clients must never paste a snippet
+12. **Domain and email** - who renews what, and why email isn't the website
+13. **Backups & restore** - client-managed or studio-managed variants
+14. **Maintenance** - same two variants
+15. **Keeping the site fast** - how not to spend the PageSpeed score you shipped
 16. **Hands-off zones**
-17. **When something breaks**: symptom-first triage table and a report template
+17. **When something breaks** - symptom-first triage table and a report template
 18. **Glossary**
 
 Everything is one self-contained HTML file: no build step, no dependencies beyond
